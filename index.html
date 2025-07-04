@@ -1,199 +1,64 @@
+/* FOLDER STRUCTURE:
+   - index.html (Home)
+   - shop/index.html
+   - about/index.html
+   - contact/index.html
+   This file is index.html (Homepage)
+*/
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Monica's Safari Home Co.</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
     body { margin: 0; font-family: 'Roboto', sans-serif; background-color: #f5f3ee; color: #333; }
-    header { background-color: #8B5E3C; color: white; padding: 20px 40px; text-align: center; }
-    nav { background-color: #d9c3a8; padding: 10px 40px; display: flex; justify-content: center; gap: 20px; }
-    nav a { color: #5c4226; text-decoration: none; font-weight: 500; }
+    header { background-color: #8B5E3C; color: white; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+    .logo h1 { margin: 0; font-size: 1.8em; }
+    nav { display: flex; gap: 20px; align-items: center; }
+    nav a { color: white; text-decoration: none; font-weight: 500; }
+    .menu-icon { font-size: 24px; cursor: pointer; display: none; }
+
     .hero { background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c'); background-size: cover; background-position: center; color: white; padding: 100px 40px; text-align: center; }
     .hero h1 { font-size: 3em; margin: 0; }
-    .section { padding: 60px 40px; text-align: center; }
-    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
-    .product { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding: 20px; }
-    .product img { max-width: 100%; border-radius: 10px; }
-    .product button, .product form { margin-top: 10px; }
-    .product button, .product input[type=submit] { padding: 10px 15px; background-color: #8B5E3C; color: white; border: none; border-radius: 6px; cursor: pointer; }
-    #cartModal { position: fixed; top: 0; right: 0; width: 300px; height: 100%; background: white; box-shadow: -2px 0 10px rgba(0,0,0,0.2); padding: 20px; display: none; flex-direction: column; overflow-y: auto; }
-    #cartModal h2 { margin-top: 0; }
-    #cartButton { position: fixed; top: 20px; right: 20px; background-color: #8B5E3C; color: white; padding: 10px; border: none; border-radius: 50%; font-size: 18px; cursor: pointer; }
+
     footer { background-color: #8B5E3C; color: white; text-align: center; padding: 20px 40px; }
+
+    @media (max-width: 768px) {
+      nav { display: none; flex-direction: column; background-color: #8B5E3C; position: absolute; top: 70px; right: 20px; padding: 10px; border-radius: 8px; }
+      nav.show { display: flex; }
+      .menu-icon { display: block; color: white; }
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Monica's Safari Home Co.</h1>
-    <p>Elegant, Affordable Furniture – Delivered to Your Door</p>
+    <div class="logo">
+      <h1>Monica's Safari Home</h1>
+    </div>
+    <div class="menu-icon" onclick="toggleMenu()">&#8942;</div>
+    <nav id="topNav">
+      <a href="shop/index.html">Shop</a>
+      <a href="about/index.html">About</a>
+      <a href="contact/index.html">Contact</a>
+    </nav>
   </header>
-
-  <nav>
-    <a href="#products">Shop</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
 
   <div class="hero">
     <h1>Bring the Safari Home</h1>
     <p>Explore our unique range of furniture inspired by the wild beauty of Africa</p>
   </div>
 
-  <div class="section" id="products">
-    <h2>Featured Products</h2>
-    <div class="products">
-      <!-- Product 1 -->
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7" alt="Bed">
-        <h3>Rustic Wooden Bed</h3>
-        <p>$350.00</p>
-        <button onclick="addToCart('Rustic Wooden Bed', 350)">Add to Cart</button>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-          <input type="hidden" name="cmd" value="_xclick">
-          <input type="hidden" name="business" value="francistatua03@gmail.com">
-          <input type="hidden" name="item_name" value="Rustic Wooden Bed">
-          <input type="hidden" name="amount" value="350.00">
-          <input type="hidden" name="currency_code" value="USD">
-          <input type="submit" value="Buy Now with PayPal">
-        </form>
-        <button onclick="alert('To pay via M-Pesa, send KES 49,000 to +254 113 348572 and confirm via WhatsApp.')">Pay with M-Pesa</button>
-      </div>
-
-      <!-- Product 2 -->
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1616627452304-5ab6f0639be6" alt="Chair">
-        <h3>Safari Lounge Chair</h3>
-        <p>$120.00</p>
-        <button onclick="addToCart('Safari Lounge Chair', 120)">Add to Cart</button>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-          <input type="hidden" name="cmd" value="_xclick">
-          <input type="hidden" name="business" value="francistatua03@gmail.com">
-          <input type="hidden" name="item_name" value="Safari Lounge Chair">
-          <input type="hidden" name="amount" value="120.00">
-          <input type="hidden" name="currency_code" value="USD">
-          <input type="submit" value="Buy Now with PayPal">
-        </form>
-        <button onclick="alert('To pay via M-Pesa, send KES 16,800 to +254 113 348572 and confirm via WhatsApp.')">Pay with M-Pesa</button>
-      </div>
-
-      <!-- Product 3 -->
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1598300052203-1fbd1a8bbcc5" alt="Table">
-        <h3>Handcrafted Dining Table</h3>
-        <p>$280.00</p>
-        <button onclick="addToCart('Handcrafted Dining Table', 280)">Add to Cart</button>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-          <input type="hidden" name="cmd" value="_xclick">
-          <input type="hidden" name="business" value="francistatua03@gmail.com">
-          <input type="hidden" name="item_name" value="Handcrafted Dining Table">
-          <input type="hidden" name="amount" value="280.00">
-          <input type="hidden" name="currency_code" value="USD">
-          <input type="submit" value="Buy Now with PayPal">
-        </form>
-        <button onclick="alert('To pay via M-Pesa, send KES 39,200 to +254 113 348572 and confirm via WhatsApp.')">Pay with M-Pesa</button>
-      </div>
-
-      <!-- Product 4 -->
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1605740821095-e9d36e43c5a2" alt="Sofa">
-        <h3>Woven Rattan Sofa</h3>
-        <p>$410.00</p>
-        <button onclick="addToCart('Woven Rattan Sofa', 410)">Add to Cart</button>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-          <input type="hidden" name="cmd" value="_xclick">
-          <input type="hidden" name="business" value="francistatua03@gmail.com">
-          <input type="hidden" name="item_name" value="Woven Rattan Sofa">
-          <input type="hidden" name="amount" value="410.00">
-          <input type="hidden" name="currency_code" value="USD">
-          <input type="submit" value="Buy Now with PayPal">
-        </form>
-        <button onclick="alert('To pay via M-Pesa, send KES 57,400 to +254 113 348572 and confirm via WhatsApp.')">Pay with M-Pesa</button>
-      </div>
-
-      <!-- Product 5 -->
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1616628182503-772b948b1073" alt="Bookshelf">
-        <h3>Safari Bookshelf</h3>
-        <p>$150.00</p>
-        <button onclick="addToCart('Safari Bookshelf', 150)">Add to Cart</button>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-          <input type="hidden" name="cmd" value="_xclick">
-          <input type="hidden" name="business" value="francistatua03@gmail.com">
-          <input type="hidden" name="item_name" value="Safari Bookshelf">
-          <input type="hidden" name="amount" value="150.00">
-          <input type="hidden" name="currency_code" value="USD">
-          <input type="submit" value="Buy Now with PayPal">
-        </form>
-        <button onclick="alert('To pay via M-Pesa, send KES 21,000 to +254 113 348572 and confirm via WhatsApp.')">Pay with M-Pesa</button>
-      </div>
-
-      <!-- Product 6 -->
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1582281298056-dc5aa1d82a20" alt="Ottoman">
-        <h3>Luxury Ottoman</h3>
-        <p>$90.00</p>
-        <button onclick="addToCart('Luxury Ottoman', 90)">Add to Cart</button>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-          <input type="hidden" name="cmd" value="_xclick">
-          <input type="hidden" name="business" value="francistatua03@gmail.com">
-          <input type="hidden" name="item_name" value="Luxury Ottoman">
-          <input type="hidden" name="amount" value="90.00">
-          <input type="hidden" name="currency_code" value="USD">
-          <input type="submit" value="Buy Now with PayPal">
-        </form>
-        <button onclick="alert('To pay via M-Pesa, send KES 12,600 to +254 113 348572 and confirm via WhatsApp.')">Pay with M-Pesa</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="about">
-    <h2>About Us</h2>
-    <p>Monica's Safari Home Co. is a furniture drop shipping brand based in Utawala, Nairobi, Kenya, dedicated to delivering quality, handmade-inspired pieces to your home. We source from trusted suppliers and ensure every product tells a story of culture, nature, and comfort.</p>
-  </div>
-
-  <div class="section" id="contact">
-    <h2>Contact Us</h2>
-    <p>Email: info@monicassafarihome.com | Phone: +254 113 348572</p>
-  </div>
-
   <footer>
     <p>&copy; 2025 Monica's Safari Home Co. All Rights Reserved.</p>
   </footer>
 
-  <button id="cartButton" onclick="toggleCart()">🛒</button>
-  <div id="cartModal">
-    <h2>Your Cart</h2>
-    <ul id="cartItems"></ul>
-    <p><strong>Total: $<span id="cartTotal">0</span></strong></p>
-  </div>
-
   <script>
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    function addToCart(name, price) {
-      cart.push({ name, price });
-      localStorage.setItem('cart', JSON.stringify(cart));
-      alert(name + ' added to cart!');
-      updateCart();
-    }
-    function toggleCart() {
-      const modal = document.getElementById('cartModal');
-      modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
-      updateCart();
-    }
-    function updateCart() {
-      const cartItems = document.getElementById('cartItems');
-      const cartTotal = document.getElementById('cartTotal');
-      cartItems.innerHTML = '';
-      let total = 0;
-      cart.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = `${item.name} - $${item.price}`;
-        cartItems.appendChild(li);
-        total += item.price;
-      });
-      cartTotal.textContent = total.toFixed(2);
+    function toggleMenu() {
+      const nav = document.getElementById("topNav");
+      nav.classList.toggle("show");
     }
   </script>
 </body>
